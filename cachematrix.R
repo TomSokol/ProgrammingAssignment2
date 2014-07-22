@@ -20,48 +20,48 @@
 
 #Create an object to get and set a matrix and its inverse
 makeCacheMatrix <- function(x = matrix()) {
-  
-  i <- NULL # i will hold the inverse
-  
-  set <- function(y) {  
-    x <<- y # x will hold the original matrix
-    i <<- NULL
-  }
-  
-  get <- function(){
-    x
-  }
-  
-  setinverse <- function(inverse){  
-    i <<- inverse   
-  }
-  
-  getinverse <- function(){
-    i
-  }
-  
-  #return list of functions  
-  list(set = set, get = get,
-       setinverse = setinverse,
-       getinverse = getinverse)
+    
+    i <- NULL # i will hold the inverse
+    
+    set <- function(y) {  
+        x <<- y # x will hold the original matrix
+        i <<- NULL
+    }
+    
+    get <- function(){
+        x
+    }
+    
+    setinverse <- function(inverse){  
+        i <<- inverse   
+    }
+    
+    getinverse <- function(){
+        i
+    }
+    
+    #return list of functions  
+    list(set = set, get = get,
+         setinverse = setinverse,
+         getinverse = getinverse)
 }
 
 
 ## Return a matrix that is the inverse of 'x', use cached calue if it exists
 cacheSolve <- function(x, ...) {
-  
-  #check if inverse already exists
-  m <- x$getinverse()
-  
-  if(!is.null(m)) {
-    message("getting cached data")
-    return(m)  #return cached inverse
-  }
-  
-  #if inverse not stored
-  data <- x$get()
-  m <- solve(data, ...) #calculate inverse
-  x$setinverse(m) #store inverse
-  m
+    
+    #check if inverse already exists
+    m <- x$getinverse()
+    
+    if(!is.null(m)) {
+        message("getting cached data")
+        return(m)  #return cached inverse
+    }
+    
+    #if inverse not stored
+    data <- x$get()
+    m <- solve(data, ...) #calculate inverse
+    x$setinverse(m) #store inverse
+    m
 }
 
